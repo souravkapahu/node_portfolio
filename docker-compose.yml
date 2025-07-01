@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: portfolio_app
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=dev
+      - MONGO_URI=${MONGO_URI}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: portfolio_mongodb
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
+
