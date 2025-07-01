@@ -13,21 +13,24 @@ export class ProjectsService {
         private readonly projectAggregationService: ProjectAggregationService
     ) { }
 
-    async create(body: any, file: any) {
+    async create(body: any, file: any): Promise<any> {
         if (!file) throw new Error(message.logoRequired)
-        return await this.projectRepository.create(body)
+        return await this.projectRepository.create({ ...body, logo: file.path })
     }
 
-    async update(body: any, file: any) {
+    async update(body: any, file: any): Promise<boolean> {
         const { _id } = body
         const updateObj = { ...(file && { logo: file.path }) }
 
         for (let key in body) if (body[key]) updateObj[key] = body[key]
 
-        return await this.projectRepository.updateCustomWithOptions({ _id }, updateObj)
+        const project = await this.projectRepository.findOneAndUpdateCustomWithOptions({ _id }, updateObj)
+        if (!project) throw new Error(message.projectNotFound)
+
+        return true
     }
 
-    async list(body: any) {
+    async list(body: any): Promise<any> {
         return await this.projectAggregationService.getProjectsList(body)
     }
 }

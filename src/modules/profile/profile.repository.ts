@@ -14,6 +14,6 @@ export class ProfileRepository {
     }
 
     async findOneWithCustomFields(filter: any) {
-        return await this.Profile.findOne(filter).lean()
+        return await this.Profile.findOne(filter, { __v: 0, updatedAt: 0 }).lean()
     }
 }

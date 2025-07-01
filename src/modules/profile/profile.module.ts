@@ -7,8 +7,8 @@ import { Profile, ProfileSchema } from './schemas/profile.schema';
 import { ProfileService } from './profile.service';
 
 @Module({
+    controllers: [ProfileController],
     providers: [
-        ProfileController,
         ProfileRepository,
         ProfileAggregationService,
         ProfileService

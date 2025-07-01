@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiKeyGuard } from 'src/common/guards/apiKey.guard';
 import { handleResponeInterceptor } from 'src/common/interceptors/responseHandler';
 import { WrapAsyncInterceptor } from 'src/common/interceptors/wrapAsync.interceptor';
@@ -26,7 +26,7 @@ export class SkillsController {
         return { message: message.updateSkill }
     }
 
-    @Post('list/:profile')
+    @Get('list/:profile')
     async getSkills(@Param() params: profileIdDto) {
 
         const data = await this.skillsService.getSkills(params)

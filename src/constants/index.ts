@@ -2,6 +2,7 @@ import authConstant from './auth'
 import profileConstant from './profile'
 import skillConstant from './skill'
 import projectConstant from './project'
+import socialHandleConstant from './socialHandle'
 
 export const constants = {
     maxRequest: 'Too many requests',
@@ -43,4 +44,4 @@ export const mailSubjects = {
     otp: 'Your OTP Code',
 }
 
-export { projectConstant, skillConstant, profileConstant, authConstant }
+export { projectConstant, socialHandleConstant, skillConstant, profileConstant, authConstant }

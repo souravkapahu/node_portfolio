@@ -6,7 +6,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Skill, SkillSchema } from './schemas/skill.schema';
 
 @Module({
-  providers: [SkillsService, SkillRepository, SkillsController],
+  controllers: [SkillsController],
+  providers: [SkillsService, SkillRepository],
   imports: [
     MongooseModule.forFeature([
       { name: Skill.name, schema: SkillSchema }

@@ -1,15 +1,7 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
-import { Optional } from '@nestjs/common';
-import { IsObjectId } from 'src/common/decorators/isObjectId.decorator';
-import { ObjectId } from 'mongoose';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class updateProfileDto {
     @IsOptional()
-    @IsObjectId()
-    _id: ObjectId;
-
-    @Optional()
     @IsString()
     about: string;
 
@@ -17,7 +9,7 @@ export class updateProfileDto {
     @IsString()
     name: string;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsEmail()
     email: string;
 

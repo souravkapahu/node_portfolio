@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { ProfileRepository } from './profile.repository';
 import { ConfigService } from '@nestjs/config';
 import { Profile } from 'src/interfaces/profile/profile.interface';
-import { Types } from 'mongoose';
+import { profileConstant } from '../../constants'
+
+const message = profileConstant.profile
 
 @Injectable()
 export class ProfileService {
@@ -15,18 +17,20 @@ export class ProfileService {
     }
 
     async updateProfile(body: any, file: any): Promise<boolean> {
-        const { _id = new Types.ObjectId() } = body
+        const { email } = body
         const updateObj = { ...(file && { image: file.path }) }
 
         for (let key in body) if (body[key]) updateObj[key] = body[key]
 
-        await this.profileRepository.updateCustomWithOptions({ _id }, updateObj, { upsert: true })
+        await this.profileRepository.updateCustomWithOptions({ email }, updateObj, { upsert: true })
 
         return true
     }
 
     async getProfile(): Promise<Profile | any> {
         const profile = await this.profileRepository.findOneWithCustomFields({ email: this.email })
+
+        if (!profile) throw new Error(message.getProfile)
         return profile;
     }
 }

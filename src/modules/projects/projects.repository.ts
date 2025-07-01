@@ -17,6 +17,10 @@ export class ProjectRepository {
         return await this.Project.updateOne(filter, fields, options)
     }
 
+    async findOneAndUpdateCustomWithOptions(filter: any, fields: any, options: any = {}) {
+        return await this.Project.findOneAndUpdate(filter, fields, options)
+    }
+
     async findOneWithCustomFields(filter: any) {
         return await this.Project.findOne(filter).lean()
     }

@@ -1,35 +1,53 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
-import { Optional } from '@nestjs/common';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { IsObjectId } from 'src/common/decorators/isObjectId.decorator';
 import { ObjectId } from 'mongoose';
 
-export class updateProfileDto {
-    @IsOptional()
+export class createProjectDto {
+    @IsNotEmpty()
+    @IsObjectId()
+    user: ObjectId;
+
+    @IsNotEmpty()
+    @IsString()
+    title: string;
+
+    @IsNotEmpty()
+    @IsString()
+    description: string;
+
+    @IsNotEmpty()
+    @IsString()
+    link: string;
+}
+
+export class updateProjectDto {
+    @IsNotEmpty()
     @IsObjectId()
     _id: ObjectId;
 
-    @Optional()
+    @IsOptional()
     @IsString()
-    about: string;
+    title: string;
 
     @IsOptional()
     @IsString()
-    name: string;
-
-    @IsOptional()
-    @IsEmail()
-    email: string;
+    description: string;
 
     @IsOptional()
     @IsString()
-    phone: string;
+    link: string;
+}
+
+export class listDto {
+    @IsNotEmpty()
+    @IsObjectId()
+    user: ObjectId;
 
     @IsOptional()
-    @IsString()
-    countryCode: string;
+    @IsNumber()
+    offset: number;
 
     @IsOptional()
-    @IsString()
-    jobTitle: string;
+    @IsNumber()
+    limit: number;
 }

@@ -18,6 +18,6 @@ export class SkillRepository {
     }
 
     async findAll(filter: any) {
-        return await this.Skill.find(filter).lean()
+        return await this.Skill.find(filter, { __v: 0, updatedAt: 0 }).lean()
     }
 }

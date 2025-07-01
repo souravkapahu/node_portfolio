@@ -7,7 +7,8 @@ import { Project, ProjectSchema } from './schemas/projects.schema';
 import { ProjectAggregationService } from './aggregations/projects.aggregation';
 
 @Module({
-    providers: [ProjectsService, ProjectsController, ProjectAggregationService, ProjectRepository],
+    controllers: [ProjectsController],
+    providers: [ProjectsService, ProjectAggregationService, ProjectRepository],
     imports: [
         MongooseModule.forFeature([
             { name: Project.name, schema: ProjectSchema }

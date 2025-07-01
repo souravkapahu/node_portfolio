@@ -14,6 +14,7 @@ import { SkillsModule } from './modules/skills/skills.module';
 import { ProjectsController } from './modules/projects/projects.controller';
 import { ProjectsService } from './modules/projects/projects.service';
 import { ProjectsModule } from './modules/projects/projects.module';
+import { SocialhandleModule } from './modules/socialhandle/socialhandle.module';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { ProjectsModule } from './modules/projects/projects.module';
     }),
     ProfileModule,
     SkillsModule,
-    ProjectsModule
+    ProjectsModule,
+    SocialhandleModule,
   ],
   controllers: [AppController, ProfileController, SkillsController, ProjectsController],
   providers: [
