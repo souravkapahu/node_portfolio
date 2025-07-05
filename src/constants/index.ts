@@ -42,6 +42,7 @@ export const deviceTypes = {
 export const mailSubjects = {
     resetPassword: 'Reset Password',
     otp: 'Your OTP Code',
+    contact: 'Contact Us Notification'
 }
 
 export { projectConstant, socialHandleConstant, skillConstant, profileConstant, authConstant }

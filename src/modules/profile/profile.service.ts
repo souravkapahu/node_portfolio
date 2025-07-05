@@ -16,9 +16,11 @@ export class ProfileService {
         this.email = this.configService.get<string>('email')
     }
 
-    async updateProfile(body: any, file: any): Promise<boolean> {
+    async updateProfile(body: any, files: any): Promise<boolean> {
         const { email } = body
-        const updateObj = { ...(file && { image: file.path }) }
+        const image = files?.image?.[0];
+        const resume = files?.resume?.[0];
+        const updateObj = { ...(image && { image: image.path }), ...(resume && { resume: resume.path }) }
 
         for (let key in body) if (body[key]) updateObj[key] = body[key]
 
