@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/interceptors/http-exception.filter';
 import * as logger from 'morgan';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -31,5 +31,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   await app.listen(process.env.PORT ?? 5000);
+  Logger.log(`🚀 Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

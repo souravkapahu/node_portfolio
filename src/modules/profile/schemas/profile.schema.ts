@@ -26,5 +26,3 @@ export class Profile extends Document {
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);
-
-ProfileSchema.index({ email: 1 })
