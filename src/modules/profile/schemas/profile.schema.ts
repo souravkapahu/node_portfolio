@@ -23,8 +23,9 @@ export class Profile extends Document {
 
     @Prop({ default: null })
     image: string;
+
+    @Prop({ required: true })
+    resume: string
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);
-
-ProfileSchema.index({ email: 1 })
