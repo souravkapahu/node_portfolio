@@ -18,7 +18,7 @@ export class SkillsController {
     constructor(private readonly skillsService: SkillsService) { }
 
     @Post('update')
-    @UseInterceptors(FileInterceptor('icon', dynamicMulter('skill')))
+    @UseInterceptors(FileInterceptor('icon', dynamicMulter()))
     async updateSkills(@Body() body: updateSkillDto, @UploadedFile() file: Express.Multer.File) {
 
         await this.skillsService.updateSkills(body, file)

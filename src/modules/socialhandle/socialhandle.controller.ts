@@ -18,7 +18,7 @@ export class SocialhandleController {
     constructor(private readonly socialhandleService: SocialhandleService) { }
 
     @Post('update-add')
-    @UseInterceptors(FileInterceptor('icon', dynamicMulter('socialHandle')))
+    @UseInterceptors(FileInterceptor('icon', dynamicMulter()))
     async update(@Body() body: updateSocialDto, @UploadedFile() file: Express.Multer.File) {
         await this.socialhandleService.update(body, file)
 
