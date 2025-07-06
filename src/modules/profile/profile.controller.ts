@@ -25,7 +25,7 @@ export class ProfileController {
                 { name: 'image', maxCount: 1 },
                 { name: 'resume', maxCount: 1 },
             ],
-            dynamicMulter('profile'),
+            dynamicMulter(),
         ),
     )
     async updateProfile(@Req() req: any, @Body() body: updateProfileDto, @UploadedFiles()

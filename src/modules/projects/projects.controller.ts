@@ -20,7 +20,7 @@ export class ProjectsController {
     constructor(private readonly projectsService: ProjectsService) { }
 
     @Post('create')
-    @UseInterceptors(FileInterceptor('logo', dynamicMulter('project')))
+    @UseInterceptors(FileInterceptor('logo', dynamicMulter()))
     async create(@Body() body: createProjectDto, @UploadedFile() file: Express.Multer.File) {
         await this.projectsService.create(body, file)
 
@@ -28,7 +28,7 @@ export class ProjectsController {
     }
 
     @Put('update')
-    @UseInterceptors(FileInterceptor('logo', dynamicMulter('project')))
+    @UseInterceptors(FileInterceptor('logo', dynamicMulter()))
     async update(@Body() body: updateProjectDto, @UploadedFile() file: Express.Multer.File) {
         await this.projectsService.update(body, file)
 

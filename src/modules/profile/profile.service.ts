@@ -3,6 +3,7 @@ import { ProfileRepository } from './profile.repository';
 import { ConfigService } from '@nestjs/config';
 import { Profile } from 'src/interfaces/profile/profile.interface';
 import { profileConstant } from '../../constants'
+import { uploadToCloudinary } from 'src/common/utils/cloudinary';
 
 const message = profileConstant.profile
 
@@ -20,8 +21,16 @@ export class ProfileService {
         const { email } = body
         const image = files?.image?.[0];
         const resume = files?.resume?.[0];
-        const updateObj = { ...(image && { image: image.path }), ...(resume && { resume: resume.path }) }
+        const updateObj: any = {}
+        if (image) {
+            const imageUrl = await uploadToCloudinary(image, 'profile');
+            updateObj.image = imageUrl.secure_url
+        }
 
+        if (resume) {
+            const resumeUrl = await uploadToCloudinary(resume, 'profile');
+            updateObj.resume = resumeUrl.secure_url
+        }
         for (let key in body) if (body[key]) updateObj[key] = body[key]
 
         await this.profileRepository.updateCustomWithOptions({ email }, updateObj, { upsert: true })
